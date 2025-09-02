@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Pharaoh's Curse</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="game-container">
+
+        <div id="start-screen" class="screen">
+            <h1 class="title">The Pharaoh’s Curse</h1>
+            <p class="story">Deep inside the sands of Egypt lies the tomb of Pharaoh Aten-Ra. Legend says anyone who enters without solving his trials will be cursed forever. Your expedition has just unearthed the entrance—but as you step inside, the stone door grinds shut behind you. The only way out is forward. You have 25 minutes and 5 chances before the curse claims you.</p>
+            <button id="start-button" class="btn">Enter the Tomb</button>
+        </div>
+
+        <div id="game-screen" class="screen hidden">
+            <div id="status-bar">
+                <div id="timer-display">Time Left: 25:00</div>
+                <div id="lives-display"></div>
+                <div id="hint-display">Hints Left: 3</div>
+            </div>
+            
+            <div id="puzzle-container">
+                </div>
+
+            <div id="hint-box" class="hidden"></div>
+            <button id="hint-button" class="btn">Request Hint</button>
+        </div>
+
+        <div id="win-screen" class="screen hidden">
+            <h1 class="title">Treasure Secured!</h1>
+            <p class="story">The final lock clicks open. The sarcophagus reveals not a mummy, but a cascade of golden coins and jewels! You have broken the curse and escaped with the Pharaoh's riches.</p>
+            <div id="treasure-animation">
+                <div class="coin"></div>
+                <div class="coin"></div>
+                <div class="coin"></div>
+                <div class="coin"></div>
+                <div class="coin"></div>
+                <div class="coin"></div>
+                <div class="coin"></div>
+            </div>
+            <button id="restart-button-win" class="btn">Play Again</button>
+        </div>
+
+        <div id="lose-screen" class="screen hidden">
+             <h1 class="title">The Curse Claims You</h1>
+            <div id="snake-animation">
+                <svg class="snake" viewBox="0 0 100 100">
+                    <path d="M 95,50 C 95,80 65,80 65,50 C 65,20 35,20 35,50 C 35,80 5,80 5,50" stroke="gold" stroke-width="5" fill="none" />
+                </svg>
+                 <svg class="snake" viewBox="0 0 100 100">
+                    <path d="M 95,50 C 95,80 65,80 65,50 C 65,20 35,20 35,50 C 35,80 5,80 5,50" stroke="#E74C3C" stroke-width="5" fill="none" />
+                </svg>
+            </div>
+            <p class="story">The air grows thin as your chances run out. From the shadows, the tomb's ancient guardians emerge... You are now part of the Pharaoh's eternal collection.</p>
+            <button id="restart-button-lose" class="btn">Try Again</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
