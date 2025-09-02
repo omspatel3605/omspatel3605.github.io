@@ -25,16 +25,21 @@ html {
 body {
     font-family: var(--body-font);
     background-color: var(--background-color);
-    /* Hieroglyphic texture with a subtle "torchlight" gradient from the top */
     background-image: radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 70%), url('https://www.transparenttextures.com/patterns/egyptian-flat.png');
     color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 1rem;
     overflow-x: hidden;
-    -webkit-tap-highlight-color: transparent; /* Removes tap highlight on iOS */
+    -webkit-tap-highlight-color: transparent;
+
+    /* --- SAFE AREA FIX --- */
+    /* This ensures content is not hidden by notches or system bars */
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-right: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    padding-left: 1rem;
 }
 
 #game-container {
