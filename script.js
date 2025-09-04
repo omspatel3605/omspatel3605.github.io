@@ -27,18 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Puzzle Data (Expanded & More Challenging) ---
     const puzzles = [
         {
-    // Puzzle 1: Caesar Cipher (Classic warm-up)
-    html: `
-    <div class="puzzle">
-        <h2>Trial 1: The Scribe's Secret</h2>
-        <p class="puzzle-text">A faded papyrus scroll bears a message, seemingly shifted by an ancient Roman's hand...</p>
-        <p class="cipher-text">"QEB NXOBO FP KLP PBZOBQ"</p>
-        <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the decoded phrase">
-        <button class="btn submit-btn">Submit Answer</button>
-    </div>
-    `,
-    answer: "THE ORDER IS NEW SECRET",
-    hint: "Julius Caesar favored a shift of three letters. Look backwards in the alphabet."
+        html: `
+        <div id="puzzle-1" class="puzzle">
+            <h2>Trial 1: The Hieroglyph Cipher</h2>
+            <p class="puzzle-text">An ancient papyrus scroll reveals a coded message. The inscription whispers of an ancient Roman shift...</p>
+            <p class="cipher-text">"Wkh vxq pdvnhv wkh wuxwk, exw wkh sludp<span class="highlight">LG</span> sr<span class="highlight">L</span>qwv wkh zdb."</p>
+            <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the key word">
+            <button class="btn submit-btn">Submit Answer</button>
+        </div>
+        `,
+        answer: "PYRAMID",   // Caesar shift key solution
+        hint: "Think about Caesar’s cipher — shift the letters back by 3."
 },
 {
     // Puzzle 2: Symbol Math (Logic)
@@ -74,38 +73,44 @@ document.addEventListener('DOMContentLoaded', () => {
     hint: "Think about representations of the real world, not the world itself."
 },
 {
-    // Puzzle 4: Pattern Recognition (Visual)
-    html: `
-    <div class="puzzle">
-        <h2>Trial 4: The Canopic Jars</h2>
-        <p class="puzzle-text">Four sacred canopic jars stand on a pedestal, but one is an impostor. Three share a common vertical line of symbols. Which one is different?</p>
-        <div class="grid-puzzle">
-            <div class="grid-cell"><div class="grid-cell-content">🏺<br>🦅<br>🐍</div></div>
-            <div class="grid-cell"><div class="grid-cell-content">🏺<br>🐺<br>🐍</div></div>
-            <div class="grid-cell"><div class="grid-cell-content">🏺<br>🧔<br>🐍</div></div>
+        html: `
+        <div id="puzzle-3" class="puzzle">
+            <h2>Trial 3: The Riddle of the Sphinx</h2>
+            <p class="puzzle-text">A statue of a great Sphinx blocks the path. Its stone lips speak a single, timeless riddle.</p>
+            <blockquote class="riddle-text">"I walk on four feet in the morning, two in the afternoon, and three in the evening. What am I?"</blockquote>
+            <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter your answer">
+            <button class="btn submit-btn">Submit Answer</button>
         </div>
-        <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the odd one out (e.g., Wolf)">
-        <button class="btn submit-btn">Submit Answer</button>
-    </div>
-    `,
-    answer: "WOLF",
-    hint: "The four sons of Horus are Falcon, Human, Baboon, and Jackal. The Wolf is an impostor."
+        `,
+        answer: "HUMAN",
+        hint: "Think of life stages: crawling, walking, cane."
 },
 {
-    // Puzzle 5: Final Multi-step puzzle
-    html: `
-    <div class="puzzle">
-        <h2>Final Trial: The Pharaoh's Word</h2>
-        <p class="puzzle-text">The final door requires a six-letter password. A carving shows a sequence of numbers and a statement.</p>
-        <p class="cipher-text">5, 1, 2, 3, 6, 2</p>
-        <p class="puzzle-text">"Take the fifth letter from the Scribe's answer. The first from the Sphinx's. The second from the Impostor Jar. The third again. The sixth from the Scribe's. The second from the Sphinx's."</p>
-        <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the final password">
-        <button class="btn submit-btn">Submit Answer</button>
+  html: `
+  <div class="puzzle">
+    <h2>Final Trial: The Pharaoh's Lock</h2>
+
+    <p class="puzzle-text">
+      A heavy bronze plaque hangs over the final gate. Four carved lines read:
+    </p>
+
+    <div class="cipher-text" style="font-size:1.05rem; line-height:1.5;">
+      <p>1. I am a wartime shelter, dug out of earth and line of sight.</p>
+      <p>2. Take letters <b>1, 3, and 4</b> of my name — they spell a number.</p>
+      <p>3. Add the letter <b>I</b> to my last three letters and you get a common unit of length.</p>
+      <p>4. I guard the approach; to pass you must go <em>through</em> me.</p>
     </div>
-    `,
-    answer: "ESCAPE", 
-    hint: "Recall your answers: Scribe = 'THE ORDER IS NEW SECRET', Sphinx = 'MAP', Jar = 'WOLF'."
+
+    <p class="puzzle-text">Enter the six-letter password to unlock the gate.</p>
+
+    <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the final password">
+    <button class="btn submit-btn">Submit Answer</button>
+  </div>
+  `,
+  answer: "TRENCH",
+  hint: "Letters 1,3,4 = T, E, N → a number. Last three letters + 'I' → INCH."
 }
+
 
     ];
 
