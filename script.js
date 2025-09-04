@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="puzzle-text">Sacred inscriptions reveal equations:</p>
                     <div class="cipher-text" style="font-size: 1.8rem; line-height: 1.5;">
                         <p>🪲 + 🪲 = 10</p>
-                        <p>🪲 × 🌞 = 30</p>
+                        <p>🪲 × 🌞 = 50</p>
                         <p>🌞 – 🪲 = 5</p>
                     </div>
                     <input type="number" id="puzzle-input" class="puzzle-input" placeholder="Enter the code">
