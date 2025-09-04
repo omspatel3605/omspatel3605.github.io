@@ -25,83 +25,70 @@ document.addEventListener('DOMContentLoaded', () => {
     let livesRemaining = 5;
 
     // --- Puzzle Data (CORRECTED AND FINAL) ---
-    const puzzles = [{
-        // Trial 1: Hieroglyph Cipher (Removed misleading highlight spans)
-        html: `
-        <div class="puzzle">
-            <h2>Trial 1: The Hieroglyph Cipher</h2>
-            <p class="puzzle-text">An ancient papyrus scroll reveals a coded message. The inscription whispers of an ancient Roman shift...</p>
-            <p class="cipher-text">"Wkh vxq pdvnhv wkh wuxwk, exw wkh sludplg srlqwv wkh zdb."</p>
-            <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the key word">
-            <button class="btn submit-btn">Submit Answer</button>
+    const puzzles = [
+        {
+    // Puzzle 1: Hieroglyph Cipher
+    html: `
+    <div class="puzzle">
+        <h2>Puzzle 1: The Hieroglyph Cipher</h2>
+        <p class="puzzle-text">A papyrus scroll with a substitution cipher (Shift “-3”):</p>
+        <p class="cipher-text">"WKH VXQ PDVNHV WKH WUXWK, EXW WKH S\UDPLG SRLQWV WKH ZDB."</p>
+        <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the decoded phrase">
+        <button class="btn submit-btn">Submit Answer</button>
+    </div>
+    `,
+    answer: "THE SUN MASKS THE TRUTH, BUT THE PYRAMID POINTS THE WAY",
+    hint: "Think of ancient shifts."
+},
+{
+    // Puzzle 2: The Scarab Math Puzzle
+    html: `
+    <div class="puzzle">
+        <h2>Puzzle 2: The Scarab Math Puzzle</h2>
+        <p class="puzzle-text">Sacred inscriptions reveal equations:</p>
+        <div class="cipher-text" style="font-size: 1.8rem; line-height: 1.5;">
+            <p>🪲 + 🪲 = 10</p>
+            <p>🪲 × 🌞 = 30</p>
+            <p>🌞 – 🪲 = 5</p>
         </div>
-        `,
-        answer: "PYRAMID",
-        hint: "Think about Caesar’s cipher — shift the letters back by 3."
-    }, {
-        // Trial 2: Scarab's Value (No changes needed)
-        html: `
-        <div class="puzzle">
-            <h2>Trial 2: The Scarab's Value</h2>
-            <p class="puzzle-text">The next chamber is sealed by a numerical lock. An inscription on the wall shows three equations using sacred symbols.</p>
-            <div class="cipher-text" style="font-size: 1.8rem; line-height: 1.5;">
-                <p>𓋹 + 𓋹 + 𓋹 = 21</p>
-                <p>𓂀 × 𓋹 = 49</p>
-                <p>𓂀 - 𓆣 = 𓋹</p>
-            </div>
-            <p class="puzzle-text">What is the three-digit code from the values of 𓋹 (Ankh), 𓂀 (Eye of Horus), and 𓆣 (Scarab)?</p>
-            <input type="number" id="puzzle-input" class="puzzle-input" placeholder="Enter the 3-digit code">
-            <button class="btn submit-btn">Submit Answer</button>
-        </div>
-        `,
-        answer: "770",
-        hint: "Solve the equations from top to bottom. The first line reveals the value of the Ankh (𓋹)."
-    }, {
-        // Trial 3: Riddle of the Sphinx (No changes needed)
-        html: `
-        <div class="puzzle">
-            <h2>Trial 3: Riddle of the Sphinx</h2>
-            <p class="puzzle-text">A great stone Sphinx blocks your path. Its voice echoes in your mind, not with a question of creatures, but of existence.</p>
-            <blockquote class="riddle-text">"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?"</blockquote>
-            <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter your answer">
-            <button class="btn submit-btn">Submit Answer</button>
-        </div>
-        `,
-        answer: "MAP",
-        hint: "Think about representations of the real world, not the world itself."
-    }, {
-        // Trial 4: Renamed from "Trial 3" to "Trial 4" and given a new subtitle
-        html: `
-        <div class="puzzle">
-            <h2>Trial 4: The Riddle of Ages</h2>
-            <p class="puzzle-text">Another statue of a great Sphinx blocks the path. Its stone lips speak a single, timeless riddle.</p>
-            <blockquote class="riddle-text">"I walk on four feet in the morning, two in the afternoon, and three in the evening. What am I?"</blockquote>
-            <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter your answer">
-            <button class="btn submit-btn">Submit Answer</button>
-        </div>
-        `,
-        answer: "HUMAN",
-        hint: "Think of life stages: crawling, walking, and using a cane."
-    }, {
-        // Final Trial: (No changes needed)
-        html: `
-        <div class="puzzle">
-            <h2>Final Trial: The Pharaoh's Lock</h2>
-            <p class="puzzle-text">A heavy bronze plaque hangs over the final gate. Four carved lines read:</p>
-            <div class="cipher-text" style="font-size:1.05rem; line-height:1.5;">
-                <p>1. I am a wartime shelter, dug out of earth and line of sight.</p>
-                <p>2. Take letters <b>1, 3, and 4</b> of my name — they spell a number.</p>
-                <p>3. Add the letter <b>I</b> to my last three letters and you get a common unit of length.</p>
-                <p>4. I guard the approach; to pass you must go <em>through</em> me.</p>
-            </div>
-            <p class="puzzle-text">Enter the six-letter password to unlock the gate.</p>
-            <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the final password">
-            <button class="btn submit-btn">Submit Answer</button>
-        </div>
-        `,
-        answer: "TRENCH",
-        hint: "Letters 1,3,4 = T, E, N → a number. Last three letters + 'I' → INCH."
-    }];
+        <input type="number" id="puzzle-input" class="puzzle-input" placeholder="Enter the code">
+        <button class="btn submit-btn">Submit Answer</button>
+    </div>
+    `,
+    answer: "510", // Scarab=5, Sun=10
+    hint: "Treat them as numbers."
+},
+{
+    // Puzzle 3: Riddle of the Sphinx
+    html: `
+    <div class="puzzle">
+        <h2>Puzzle 3: Riddle of the Sphinx</h2>
+        <p class="puzzle-text">The great Sphinx challenges you with a riddle:</p>
+        <blockquote class="riddle-text">"I walk on four in the morning, two in the day, and three at night. What am I?"</blockquote>
+        <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter your answer">
+        <button class="btn submit-btn">Submit Answer</button>
+    </div>
+    `,
+    answer: "HUMAN",
+    hint: "The Sphinx guards the answer."
+},
+{
+    // Puzzle 4: The Polybius Mystery
+    html: `
+    <div class="puzzle">
+        <h2>Puzzle 4: The Polybius Mystery</h2>
+        <p class="puzzle-text">Numbers carved into the stone:</p>
+        <p class="cipher-text">43 35 23 24 33 53</p>
+        <p class="puzzle-text">Each pair points to a row and column in a Polybius square (I/J combined).</p>
+        <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the decoded word">
+        <button class="btn submit-btn">Submit Answer</button>
+    </div>
+    `,
+    answer: "SPHINX",
+    hint: "Each pair of numbers points to a row and column in a 5x5 grid."
+}
+
+];
 
     // --- Core Game Functions ---
     function showScreen(screen) {
