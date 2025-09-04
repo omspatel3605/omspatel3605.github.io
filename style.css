@@ -1,91 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&display=swap');
 
-/* --- Core Styles & Design System Variables --- */
 :root {
-    --primary-color: #D4AF37; /* Old Gold */
-    --secondary-color: #000000; /* Pure Black for depth */
-    --accent-color: #40E0D0; /* Turquoise/Lapis Lazuli Blue */
-    --text-color: #F5F5DC; /* Beige/Papyrus White */
+    --primary-color: #D4AF37; 
+    --secondary-color: #000000; 
+    --accent-color: #40E0D0; 
+    --text-color: #F5F5DC; 
     --background-color: #1a1a1a;
     --heading-font: 'Cinzel Decorative', serif;
-    --body-font: 'EB Garaamond', serif;
+    --body-font: 'EB Garamond', serif;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    /* Establishes a base font size for rem units */
-    font-size: 100%; 
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: var(--body-font);
     background-color: var(--background-color);
-    background-image: radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 70%), url('https://www.transparenttextures.com/patterns/egyptian-flat.png');
+    background-image: 
+        url('https://www.transparenttextures.com/patterns/aged-paper.png'),
+        url('https://www.transparenttextures.com/patterns/egyptian-flat.png');
+    background-blend-mode: multiply;
     color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 1rem;
     overflow-x: hidden;
-    -webkit-tap-highlight-color: transparent;
-
-    /* --- SAFE AREA FIX --- */
-    /* This ensures content is not hidden by notches or system bars */
-    padding-top: max(1rem, env(safe-area-inset-top));
-    padding-right: 1rem;
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-    padding-left: 1rem;
 }
 
 #game-container {
     width: 100%;
     max-width: 480px;
-    min-height: 90vh; /* Ensures container fills tall screens */
-    background-color: rgba(10, 10, 10, 0.9);
+    min-height: 90vh;
+    background-color: rgba(20, 20, 20, 0.9);
     border: 0.125rem solid #a88d2c;
     border-top: 0.4rem solid var(--primary-color);
     border-bottom: 0.4rem solid var(--primary-color);
     border-radius: 0.5rem;
     padding: 1.5rem;
-    /* Deeper shadow for a more "carved" look */
     box-shadow: 0 0 2.5rem rgba(212, 175, 55, 0.3), inset 0 0 1rem rgba(0,0,0,0.7);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-/* --- Animations --- */
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-0.3rem); }
-    75% { transform: translateX(0.3rem); }
-}
-.shake {
-    animation: shake 0.3s linear;
-}
-
-/* --- Screen Management --- */
-.screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Egyptian glyph background overlay */
+#game-container::before {
+    content: "𓂀 𓃰 𓏏 𓂻 𓅓 𓎛 𓊖 𓆣";
+    font-family: var(--heading-font);
+    font-size: 5rem;
+    opacity: 0.05;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    right: 5%;
     text-align: center;
-    flex-grow: 1;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.screen { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    flex-grow: 1; 
+    z-index: 1; 
 }
 .hidden { display: none; }
 
-/* --- Typography (Optimized with clamp() for fluid scaling) --- */
 .title {
     font-family: var(--heading-font);
-    font-size: clamp(2.5rem, 10vw, 3.5rem); /* Scales between 2.5rem and 3.5rem */
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
     color: var(--primary-color);
     margin-bottom: 1.25rem;
-    text-shadow: 0 0 1rem rgba(212, 175, 55, 0.4), 0.2rem 0.2rem 0.3rem var(--secondary-color);
+    text-shadow: 0 0 1rem rgba(212, 175, 55, 0.6), 0.2rem 0.2rem 0.3rem var(--secondary-color);
 }
 
 h2 {
@@ -96,19 +86,15 @@ h2 {
 }
 
 p, blockquote {
-    font-size: clamp(1rem, 4.5vw, 1.2rem); /* Min 16px to prevent iOS zoom */
+    font-size: clamp(1rem, 4.5vw, 1.2rem);
     line-height: 1.7;
     margin-bottom: 1.25rem;
-    text-shadow: 1px 1px 2px var(--secondary-color); /* Improves readability */
+    text-shadow: 1px 1px 2px var(--secondary-color);
 }
 
-.story {
-    font-style: italic;
-    color: #bdc3c7;
-    font-size: clamp(0.9rem, 4vw, 1.1rem);
-}
+.story { font-style: italic; color: #bdc3c7; }
 
-/* --- Buttons and Inputs --- */
+/* Buttons */
 .btn {
     font-family: var(--heading-font);
     font-size: clamp(1.1rem, 5vw, 1.4rem);
@@ -126,24 +112,15 @@ p, blockquote {
     width: 90%;
     max-width: 350px;
 }
+.btn:hover { background: linear-gradient(145deg, #ffdf7e, #f1c40f); transform: translateY(-0.2rem); }
+.btn:active { transform: translateY(0.15rem); }
 
-.btn:hover { /* For devices that support hover */
-    background: linear-gradient(145deg, #ffdf7e, #f1c40f);
-    transform: translateY(-0.2rem);
-    border-bottom-width: 0.5rem;
-}
-
-.btn:active { /* Immediate feedback for touch */
-    transform: translateY(0.15rem);
-    border-bottom-width: 0.25rem;
-    background: linear-gradient(145deg, #d4af37, #f1c40f);
-}
-
+/* Input */
 .puzzle-input {
     width: 100%;
     max-width: 400px;
     padding: 1rem;
-    font-size: 1.3rem; /* Over 16px to prevent iOS zoom on focus */
+    font-size: 1.3rem;
     background-color: transparent;
     border: none;
     box-shadow: inset 0 0 0.6rem rgba(0,0,0,0.7);
@@ -156,27 +133,23 @@ p, blockquote {
 }
 .puzzle-input::placeholder { color: #7f8c8d; font-style: italic; }
 
-/* --- Game Screen Specifics --- */
+/* Status bar */
 #status-bar {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     font-family: var(--heading-font);
-    font-size: clamp(1.1rem, 5vw, 1.4rem);
     margin-bottom: 1.5rem;
-    padding-bottom: 0.6rem;
     border-bottom: 0.2rem double var(--primary-color);
 }
-
 #timer-display, #lives-display {
     color: var(--accent-color);
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-shadow: 0 0 0.5rem var(--accent-color);
 }
 
-/* Cartouche / Tablet styling */
+/* Puzzle content styling */
 .cipher-text, .riddle-text {
     font-family: var(--heading-font);
     font-size: clamp(1.2rem, 5.5vw, 1.5rem);
@@ -187,43 +160,138 @@ p, blockquote {
     border-radius: 0.3rem;
     margin: 1.25rem 0;
     letter-spacing: 0.1rem;
-    overflow-wrap: break-word; /* Modern property for text wrapping */
     box-shadow: inset 0 0 0.5rem rgba(0,0,0,0.6);
 }
 
-/* --- Grid Puzzle Style --- */
-.grid-puzzle {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
-    margin: 1.25rem 0;
+/* Polybius Table */
+.polybius-table {
     width: 100%;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 320px;
+    margin: 1rem auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 15px rgba(212,175,55,0.5);
 }
-.grid-cell {
-    width: 100%;
-    padding-top: 100%; /* Maintain square aspect ratio */
-    position: relative;
-    border: 0.2rem solid #a88d2c;
-    border-radius: 0.2rem;
-    background-color: rgba(0,0,0,0.3);
-    box-shadow: inset 0 0 0.3rem rgba(0,0,0,0.5);
+.polybius-table th, .polybius-table td {
+    border: 2px solid var(--primary-color);
+    padding: 0.6rem;
+    text-align: center;
+    font-weight: bold;
 }
-.grid-cell-content {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
+.polybius-table th {
+    background: rgba(212,175,55,0.2);
     color: var(--primary-color);
-    text-shadow: 0.1rem 0.1rem 0.2rem var(--secondary-color);
+    text-shadow: 0 0 5px gold;
+}
+.polybius-table td { background: rgba(0,0,0,0.4); color: var(--text-color); }
+
+/* Chest Animation */
+#final-chest-animation {
+    width: 220px;
+    height: 160px;
+    margin: 20px auto;
+    position: relative;
+    perspective: 800px;
 }
 
-/* --- Animations remain largely the same as they are performant --- */
-/* (Animations for win/lose screens are unchanged as they use efficient CSS transforms) */
+.chest {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.chest .base {
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to top, #5e3d1e, #8b5a2b);
+    border: 4px solid var(--primary-color);
+    border-radius: 0 0 0.5rem 0.5rem;
+    position: absolute;
+    bottom: 0;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
+}
+
+.chest .lid {
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, #7b4a2b, #4a2d15);
+    border: 4px solid var(--primary-color);
+    border-radius: 0.5rem 0.5rem 0 0;
+    position: absolute;
+    top: 0;
+    transform-origin: bottom center;
+    transform: rotateX(0deg);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    transition: transform 1s ease;
+    z-index: 2;
+}
+
+.chest.open .lid {
+    transform: rotateX(-110deg);
+}
+
+/* Rumble before opening */
+.chest.rumble {
+    animation: chest-rumble 0.5s ease-in-out 2;
+}
+@keyframes chest-rumble {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}
+
+/* Glowing Light when Chest Opens */
+.chest-light {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255,215,0,0.8), transparent 70%);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    border-radius: 50%;
+    filter: blur(20px);
+    z-index: 1;
+}
+.chest.open ~ .chest-light {
+    opacity: 1;
+    animation: glow-pulse 2s infinite alternate;
+}
+@keyframes glow-pulse {
+    from { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    to { transform: translateX(-50%) scale(1.2); opacity: 0.4; }
+}
+
+/* Passcode Input Cubes */
+#code-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+}
+
+.code-box {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0.6);
+    border: 2px solid var(--primary-color);
+    border-radius: 0.3rem;
+    color: var(--text-color);
+    outline: none;
+    transition: transform 0.2s, border-color 0.2s;
+}
+.code-box:focus {
+    transform: scale(1.15);
+    border-color: var(--accent-color);
+}
+
+/* Win Treasure Animation */
 #treasure-animation {
     position: relative;
     width: 200px;
@@ -253,6 +321,7 @@ p, blockquote {
 .coin:nth-child(6) { left: 80%; animation-delay: 1.4s; }
 .coin:nth-child(7) { left: 10%; animation-delay: 1.7s; }
 
+/* Lose Screen Snake */
 #snake-animation {
     position: relative;
     width: 250px;
