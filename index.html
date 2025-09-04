@@ -5,56 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Pharaoh's Curse</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div id="game-container">
 
+        <!-- Start Screen -->
         <div id="start-screen" class="screen">
             <h1 class="title">The Pharaoh’s Curse</h1>
-            <p class="story">Deep inside the sands of Egypt lies the tomb of Pharaoh Aten-Ra. Legend says anyone who enters without solving his trials will be cursed forever. Your expedition has just unearthed the entrance—but as you step inside, the stone door grinds shut behind you. The only way out is forward. You have 25 minutes and 5 chances before the curse claims you.</p>
+            <p class="story">
+                Deep inside the sands of Egypt lies the tomb of Pharaoh Aten-Ra. Legend says anyone who enters without solving his trials will be cursed forever. 
+                The only way out is forward. You have 30 minutes and 5 lives before the curse claims you.
+            </p>
             <button id="start-button" class="btn">Enter the Tomb</button>
         </div>
 
+        <!-- Game Screen -->
         <div id="game-screen" class="screen hidden">
             <div id="status-bar">
-                <div id="timer-display">Time Left: 25:00</div>
+                <div id="timer-display">Time Left: 30:00</div>
                 <div id="lives-display"></div>
                 <div id="hint-display">Hints Left: 3</div>
             </div>
             
-            <div id="puzzle-container">
-                </div>
+            <div id="lock-display">_ - _ - _ - _</div>
+
+            <div id="puzzle-container"></div>
 
             <div id="hint-box" class="hidden"></div>
             <button id="hint-button" class="btn">Request Hint</button>
         </div>
 
+        <!-- Final Chest Screen -->
+        <!-- Final Chest Screen -->
+        <div id="chest-screen" class="screen hidden">
+            <h2>The Final Chest</h2>
+            <p class="story">The Pharaoh’s chest awaits. Enter the 6-digit code to unlock it:</p>
+    
+            <div id="final-chest-animation">
+                <div class="chest">
+                <div class="lid"></div>
+                <div class="base"></div>
+            </div>
+                <div class="chest-light"></div>
+            </div>
+    
+        <div id="code-inputs">
+            <input type="text" maxlength="1" class="code-box">
+            <input type="text" maxlength="1" class="code-box">
+            <input type="text" maxlength="1" class="code-box">
+            <input type="text" maxlength="1" class="code-box">
+            <input type="text" maxlength="1" class="code-box">
+            <input type="text" maxlength="1" class="code-box">
+        </div>
+    
+        <button id="final-code-submit" class="btn">Unlock Chest</button>
+    </div>
+
+
+
+        <!-- Win Screen -->
         <div id="win-screen" class="screen hidden">
             <h1 class="title">Treasure Secured!</h1>
             <p class="story">The final lock clicks open. The sarcophagus reveals not a mummy, but a cascade of golden coins and jewels! You have broken the curse and escaped with the Pharaoh's riches.</p>
             <div id="treasure-animation">
-                <div class="coin"></div>
-                <div class="coin"></div>
-                <div class="coin"></div>
-                <div class="coin"></div>
-                <div class="coin"></div>
-                <div class="coin"></div>
-                <div class="coin"></div>
+                <div class="coin"></div><div class="coin"></div><div class="coin"></div>
+                <div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div>
             </div>
             <button id="restart-button-win" class="btn">Play Again</button>
         </div>
 
+        <!-- Lose Screen -->
         <div id="lose-screen" class="screen hidden">
-             <h1 class="title">The Curse Claims You</h1>
+            <h1 class="title">The Curse Claims You</h1>
             <div id="snake-animation">
                 <svg class="snake" viewBox="0 0 100 100">
                     <path d="M 95,50 C 95,80 65,80 65,50 C 65,20 35,20 35,50 C 35,80 5,80 5,50" stroke="gold" stroke-width="5" fill="none" />
                 </svg>
-                 <svg class="snake" viewBox="0 0 100 100">
+                <svg class="snake" viewBox="0 0 100 100">
                     <path d="M 95,50 C 95,80 65,80 65,50 C 65,20 35,20 35,50 C 35,80 5,80 5,50" stroke="#E74C3C" stroke-width="5" fill="none" />
                 </svg>
             </div>
