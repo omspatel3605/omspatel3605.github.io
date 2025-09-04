@@ -15,107 +15,95 @@ document.addEventListener('DOMContentLoaded', () => {
     const hintButton = document.getElementById('hint-button');
     const hintDisplay = document.getElementById('hint-display');
     const hintBox = document.getElementById('hint-box');
-    const livesDisplay = document.getElementById('lives-display'); // New element reference
+    const livesDisplay = document.getElementById('lives-display');
 
     // --- Game State Variables ---
     let currentPuzzle = 0;
     let timeLeft = 25 * 60; // 25 minutes in seconds
     let timerInterval;
     let hintsRemaining = 3;
-    let livesRemaining = 5; // New state for lives
+    let livesRemaining = 5;
 
-    // --- Puzzle Data (Expanded & More Challenging) ---
-    const puzzles = [
-        {
+    // --- Puzzle Data (CORRECTED AND FINAL) ---
+    const puzzles = [{
+        // Trial 1: Hieroglyph Cipher (Removed misleading highlight spans)
         html: `
-        <div id="puzzle-1" class="puzzle">
+        <div class="puzzle">
             <h2>Trial 1: The Hieroglyph Cipher</h2>
             <p class="puzzle-text">An ancient papyrus scroll reveals a coded message. The inscription whispers of an ancient Roman shift...</p>
-            <p class="cipher-text">"Wkh vxq pdvnhv wkh wuxwk, exw wkh sludp<span class="highlight">LG</span> sr<span class="highlight">L</span>qwv wkh zdb."</p>
+            <p class="cipher-text">"Wkh vxq pdvnhv wkh wuxwk, exw wkh sludplg srlqwv wkh zdb."</p>
             <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the key word">
             <button class="btn submit-btn">Submit Answer</button>
         </div>
         `,
-        answer: "PYRAMID",   // Caesar shift key solution
+        answer: "PYRAMID",
         hint: "Think about Caesar’s cipher — shift the letters back by 3."
-},
-{
-    // Puzzle 2: Symbol Math (Logic)
-    html: `
-    <div class="puzzle">
-        <h2>Trial 2: The Scarab's Value</h2>
-        <p class="puzzle-text">The next chamber is sealed by a numerical lock. An inscription on the wall shows three equations using sacred symbols.</p>
-        <div class="cipher-text" style="font-size: 1.8rem; line-height: 1.5;">
-            <p>𓋹 + 𓋹 + 𓋹 = 21</p>
-            <p>𓂀 × 𓋹 = 49</p>
-            <p>𓂀 - 𓆣 = 𓋹</p>
-        </div>
-        <p class="puzzle-text">What is the three-digit code from the values of 𓋹 (Ankh), 𓂀 (Eye of Horus), and 𓆣 (Scarab)?</p>
-        <input type="number" id="puzzle-input" class="puzzle-input" placeholder="Enter the 3-digit code">
-        <button class="btn submit-btn">Submit Answer</button>
-    </div>
-    `,
-    answer: "770", // Ankh=7, Eye=7, Scarab=0
-    hint: "Solve the equations from top to bottom. The first line reveals the value of the Ankh (𓋹)."
-},
-{
-    // Puzzle 3: Riddle (Lateral Thinking)
-    html: `
-    <div class="puzzle">
-        <h2>Trial 3: Riddle of the Sphinx</h2>
-        <p class="puzzle-text">A great stone Sphinx blocks your path. Its voice echoes in your mind, not with a question of creatures, but of existence.</p>
-        <blockquote class="riddle-text">"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?"</blockquote>
-        <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter your answer">
-        <button class="btn submit-btn">Submit Answer</button>
-    </div>
-    `,
-    answer: "MAP",
-    hint: "Think about representations of the real world, not the world itself."
-},
-{
+    }, {
+        // Trial 2: Scarab's Value (No changes needed)
         html: `
-        <div id="puzzle-3" class="puzzle">
-            <h2>Trial 3: The Riddle of the Sphinx</h2>
-            <p class="puzzle-text">A statue of a great Sphinx blocks the path. Its stone lips speak a single, timeless riddle.</p>
+        <div class="puzzle">
+            <h2>Trial 2: The Scarab's Value</h2>
+            <p class="puzzle-text">The next chamber is sealed by a numerical lock. An inscription on the wall shows three equations using sacred symbols.</p>
+            <div class="cipher-text" style="font-size: 1.8rem; line-height: 1.5;">
+                <p>𓋹 + 𓋹 + 𓋹 = 21</p>
+                <p>𓂀 × 𓋹 = 49</p>
+                <p>𓂀 - 𓆣 = 𓋹</p>
+            </div>
+            <p class="puzzle-text">What is the three-digit code from the values of 𓋹 (Ankh), 𓂀 (Eye of Horus), and 𓆣 (Scarab)?</p>
+            <input type="number" id="puzzle-input" class="puzzle-input" placeholder="Enter the 3-digit code">
+            <button class="btn submit-btn">Submit Answer</button>
+        </div>
+        `,
+        answer: "770",
+        hint: "Solve the equations from top to bottom. The first line reveals the value of the Ankh (𓋹)."
+    }, {
+        // Trial 3: Riddle of the Sphinx (No changes needed)
+        html: `
+        <div class="puzzle">
+            <h2>Trial 3: Riddle of the Sphinx</h2>
+            <p class="puzzle-text">A great stone Sphinx blocks your path. Its voice echoes in your mind, not with a question of creatures, but of existence.</p>
+            <blockquote class="riddle-text">"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?"</blockquote>
+            <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter your answer">
+            <button class="btn submit-btn">Submit Answer</button>
+        </div>
+        `,
+        answer: "MAP",
+        hint: "Think about representations of the real world, not the world itself."
+    }, {
+        // Trial 4: Renamed from "Trial 3" to "Trial 4" and given a new subtitle
+        html: `
+        <div class="puzzle">
+            <h2>Trial 4: The Riddle of Ages</h2>
+            <p class="puzzle-text">Another statue of a great Sphinx blocks the path. Its stone lips speak a single, timeless riddle.</p>
             <blockquote class="riddle-text">"I walk on four feet in the morning, two in the afternoon, and three in the evening. What am I?"</blockquote>
             <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter your answer">
             <button class="btn submit-btn">Submit Answer</button>
         </div>
         `,
         answer: "HUMAN",
-        hint: "Think of life stages: crawling, walking, cane."
-},
-{
-  html: `
-  <div class="puzzle">
-    <h2>Final Trial: The Pharaoh's Lock</h2>
-
-    <p class="puzzle-text">
-      A heavy bronze plaque hangs over the final gate. Four carved lines read:
-    </p>
-
-    <div class="cipher-text" style="font-size:1.05rem; line-height:1.5;">
-      <p>1. I am a wartime shelter, dug out of earth and line of sight.</p>
-      <p>2. Take letters <b>1, 3, and 4</b> of my name — they spell a number.</p>
-      <p>3. Add the letter <b>I</b> to my last three letters and you get a common unit of length.</p>
-      <p>4. I guard the approach; to pass you must go <em>through</em> me.</p>
-    </div>
-
-    <p class="puzzle-text">Enter the six-letter password to unlock the gate.</p>
-
-    <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the final password">
-    <button class="btn submit-btn">Submit Answer</button>
-  </div>
-  `,
-  answer: "TRENCH",
-  hint: "Letters 1,3,4 = T, E, N → a number. Last three letters + 'I' → INCH."
-}
-
-
-    ];
+        hint: "Think of life stages: crawling, walking, and using a cane."
+    }, {
+        // Final Trial: (No changes needed)
+        html: `
+        <div class="puzzle">
+            <h2>Final Trial: The Pharaoh's Lock</h2>
+            <p class="puzzle-text">A heavy bronze plaque hangs over the final gate. Four carved lines read:</p>
+            <div class="cipher-text" style="font-size:1.05rem; line-height:1.5;">
+                <p>1. I am a wartime shelter, dug out of earth and line of sight.</p>
+                <p>2. Take letters <b>1, 3, and 4</b> of my name — they spell a number.</p>
+                <p>3. Add the letter <b>I</b> to my last three letters and you get a common unit of length.</p>
+                <p>4. I guard the approach; to pass you must go <em>through</em> me.</p>
+            </div>
+            <p class="puzzle-text">Enter the six-letter password to unlock the gate.</p>
+            <input type="text" id="puzzle-input" class="puzzle-input" placeholder="Enter the final password">
+            <button class="btn submit-btn">Submit Answer</button>
+        </div>
+        `,
+        answer: "TRENCH",
+        hint: "Letters 1,3,4 = T, E, N → a number. Last three letters + 'I' → INCH."
+    }];
 
     // --- Core Game Functions ---
-
     function showScreen(screen) {
         startScreen.classList.add('hidden');
         gameScreen.classList.add('hidden');
@@ -128,12 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPuzzle = 0;
         timeLeft = 25 * 60;
         hintsRemaining = 3;
-        livesRemaining = 5; // Reset lives on start
+        livesRemaining = 5;
         hintButton.disabled = false;
         hintButton.style.opacity = '1';
         hintButton.style.cursor = 'pointer';
         updateHintDisplay();
-        updateLivesDisplay(); // Update display on start
+        updateLivesDisplay();
         hintBox.classList.add('hidden');
         hintBox.textContent = '';
         showScreen(gameScreen);
@@ -141,62 +129,30 @@ document.addEventListener('DOMContentLoaded', () => {
         startTimer();
     }
 
-    
     function loadPuzzle(puzzleIndex) {
-        // Defensive: clear container to avoid leftover nodes
-        puzzleContainer.innerHTML = '';
+        puzzleContainer.innerHTML = ''; // Clear previous puzzle
         if (puzzleIndex < puzzles.length) {
             puzzleContainer.innerHTML = puzzles[puzzleIndex].html;
             const submitButton = puzzleContainer.querySelector('.submit-btn');
             const inputField = puzzleContainer.querySelector('#puzzle-input');
-
-            if (!submitButton) {
-                console.error('loadPuzzle: submit button not found for puzzle', puzzleIndex);
-                return;
-            }
-            if (!inputField) {
-                console.error('loadPuzzle: input field (#puzzle-input) not found for puzzle', puzzleIndex);
-                // keep the button disabled to avoid silent failures
-                submitButton.disabled = true;
-                return;
-            }
-
-            // Ensure only one click handler on the submit button by replacing it with a clone (removes old listeners)
-            const submitClone = submitButton.cloneNode(true);
-            submitButton.parentNode.replaceChild(submitClone, submitButton);
-
-            submitClone.addEventListener('click', (e) => {
-                e.preventDefault();
-                checkAnswer();
-            });
-
-            // Enter key support
+            
+            submitButton.addEventListener('click', checkAnswer);
             inputField.addEventListener('keyup', function(event) {
                 if (event.key === "Enter") {
                     event.preventDefault();
-                    submitClone.click();
+                    submitButton.click();
                 }
             });
-
-            // clear and focus input
-            inputField.value = '';
             inputField.focus();
-        } else {
-            gameWon();
-        }
-    }
-);
-            inputField.focus(); 
         } else {
             gameWon();
         }
     }
 
     // --- Timer Functions ---
-
     function startTimer() {
         clearInterval(timerInterval);
-        updateTimerDisplay(); 
+        updateTimerDisplay();
         timerInterval = setInterval(() => {
             timeLeft--;
             updateTimerDisplay();
@@ -221,70 +177,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Puzzle Logic Functions ---
-
-    
     function checkAnswer() {
-        const inputField = puzzleContainer.querySelector('#puzzle-input') || document.getElementById('puzzle-input');
-        if (!inputField) {
-            console.error('checkAnswer: input field not found. currentPuzzle=', currentPuzzle);
-            return;
-        }
-
-        const userAnswerRaw = inputField.value;
-        const userAnswer = (userAnswerRaw || '').trim().toUpperCase();
-
-        const puzzleObj = puzzles[currentPuzzle];
-        if (!puzzleObj) {
-            console.error('checkAnswer: no puzzle object at index', currentPuzzle);
-            return;
-        }
-        const correctAnswer = (puzzleObj.answer || '').toString().toUpperCase();
-
-        // Debug log for easier investigation in browser console
-        console.log('Checking answer. User:', JSON.stringify(userAnswerRaw), 'Normalized:', userAnswer, 'Expected:', correctAnswer);
+        const inputField = document.getElementById('puzzle-input');
+        const userAnswer = inputField.value.trim().toUpperCase();
+        const correctAnswer = puzzles[currentPuzzle].answer.toUpperCase();
 
         if (userAnswer === correctAnswer) {
-            // correct
             currentPuzzle++;
             hintBox.classList.add('hidden');
-            // Small delay to allow any animations, then load next puzzle
-            setTimeout(() => loadPuzzle(currentPuzzle), 150);
+            loadPuzzle(currentPuzzle);
         } else {
-            // wrong
-            livesRemaining = Math.max(0, livesRemaining - 1); // defensive
-            updateLivesDisplay(); // Update the display
-
+            livesRemaining--;
+            updateLivesDisplay();
+            
             gameContainer.classList.add('shake');
-            inputField.style.border = '2px solid var(--accent-color)';
+            // Use a more specific selector if needed, but this should work
+            inputField.style.borderBottom = '2px solid #E74C3C'; // Red for error
             setTimeout(() => {
                 gameContainer.classList.remove('shake');
-                inputField.style.border = '2px solid var(--primary-color)';
+                inputField.style.borderBottom = '0.125rem solid var(--primary-color)'; // Revert to original
             }, 500);
 
-            if (livesRemaining <= 0) { // Check if game is over
+            if (livesRemaining <= 0) {
                 gameOver();
             }
         }
     }
 
-    }
-
     // --- Hint & Lives System Functions ---
-
-    
     function showHint() {
-        // Ensure we have a valid puzzle index
-        if (currentPuzzle >= puzzles.length || currentPuzzle < 0) {
-            console.warn('showHint: no active puzzle to hint for. currentPuzzle=', currentPuzzle);
-            return;
-        }
         if (hintsRemaining > 0) {
-            const p = puzzles[currentPuzzle];
-            if (!p || !p.hint) {
-                hintBox.textContent = 'No hint available for this puzzle.';
-            } else {
-                hintBox.textContent = p.hint;
-            }
+            hintBox.textContent = puzzles[currentPuzzle].hint;
             hintBox.classList.remove('hidden');
             hintsRemaining--;
             updateHintDisplay();
@@ -293,26 +216,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 hintButton.style.opacity = '0.5';
                 hintButton.style.cursor = 'not-allowed';
             }
-        } else {
-            // already no hints
-            hintButton.disabled = true;
         }
-    }
-
     }
 
     function updateHintDisplay() {
         hintDisplay.textContent = `Hints Left: ${hintsRemaining}`;
     }
 
-    // New function to update lives display
     function updateLivesDisplay() {
         livesDisplay.textContent = '❤️'.repeat(livesRemaining);
     }
 
-
     // --- Game Over/Win Functions ---
-
     function gameWon() {
         clearInterval(timerInterval);
         showScreen(winScreen);
